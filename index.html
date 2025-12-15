@@ -1,268 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Md. Ashraful Islam | Academic Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Md. Ashraful Islam | Portfolio</title>
 
-<style>
-:root{
-  --bg:#0a0f1f;
-  --glass:rgba(255,255,255,0.08);
-  --border:rgba(255,255,255,0.15);
-  --text:#eef2ff;
-  --muted:#aab0d6;
-  --primary:#4f7cff;
-  --secondary:#6f5bff;
-  --radius:20px;
-}
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.10);
+      --text:#eaf0ff;
+      --muted: rgba(234,240,255,.72);
+      --brand:#4f7cff;   /* standard professional blue */
+      --brand2:#7c4dff;  /* subtle accent */
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 20% 0%, rgba(79,124,255,.35), transparent 55%),
+                  radial-gradient(1100px 700px at 85% 25%, rgba(124,77,255,.25), transparent 50%),
+                  radial-gradient(900px 600px at 50% 100%, rgba(79,124,255,.18), transparent 55%),
+                  var(--bg);
+      overflow-x:hidden;
+    }
 
-body{
-  margin:0;
-  font-family: "Inter", system-ui, sans-serif;
-  background:
-    radial-gradient(900px 500px at 10% 10%, rgba(79,124,255,.25), transparent 50%),
-    radial-gradient(900px 500px at 90% 20%, rgba(111,91,255,.25), transparent 50%),
-    var(--bg);
-  color:var(--text);
-}
+    /* subtle moving glow blobs */
+    .blob{
+      position:fixed; inset:auto; width:420px; height:420px;
+      background: radial-gradient(circle at 30% 30%, rgba(79,124,255,.55), rgba(124,77,255,.15), transparent 60%);
+      filter: blur(24px);
+      opacity:.35;
+      z-index:-1;
+      animation: float 12s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .blob.b1{top:-120px; left:-120px;}
+    .blob.b2{bottom:-160px; right:-120px; animation-duration: 14s; opacity:.28;}
+    @keyframes float{
+      0%,100%{transform: translate(0,0) scale(1)}
+      50%{transform: translate(40px, 30px) scale(1.06)}
+    }
 
-/* floating background glow */
-.glow{
-  position:fixed;
-  width:420px;height:420px;
-  background:radial-gradient(circle, var(--primary), transparent 70%);
-  filter:blur(120px);
-  opacity:.25;
-  animation:float 12s ease-in-out infinite;
-  z-index:-1;
-}
-.glow.two{
-  right:0;bottom:0;
-  background:radial-gradient(circle, var(--secondary), transparent 70%);
-  animation-duration:14s;
-}
+    .wrap{max-width:1080px; margin:0 auto; padding:28px 18px 70px;}
+    .nav{
+      position:sticky; top:12px; z-index:5;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 14px;
+      background: rgba(12,18,32,.55);
+      border:1px solid var(--stroke);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.25);
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 0 6px rgba(79,124,255,.12);
+    }
+    .nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:14px;
+      padding:8px 12px;
+      border-radius:999px;
+      transition: .2s ease;
+    }
+    .nav a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+      transform: translateY(-1px);
+    }
 
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-40px)}
-}
+    .hero{
+      margin-top:22px;
+      padding:40px 22px 28px;
+      border-radius: var(--radius);
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(600px 240px at 20% 20%, rgba(79,124,255,.22), transparent 60%),
+                  radial-gradient(600px 240px at 80% 0%, rgba(124,77,255,.18), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:center;
+    }
+    @media (max-width: 860px){
+      .hero-inner{grid-template-columns:1fr}
+    }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:40px 20px 80px;
-}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      color:var(--muted);
+      font-size:13px;
+      width:max-content;
+      animation: fadeUp .7s ease both;
+    }
+    .badge span{
+      width:8px; height:8px; border-radius:50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(79,124,255,.14);
+    }
 
-/* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 22px;
-  border-radius:999px;
-  background:rgba(10,15,31,.6);
-  backdrop-filter:blur(10px);
-  border:1px solid var(--border);
-  position:sticky;
-  top:15px;
-  z-index:10;
-}
-nav a{
-  color:var(--muted);
-  text-decoration:none;
-  margin-left:18px;
-  font-size:14px;
-}
-nav a:hover{color:var(--text)}
+    h1{
+      margin:14px 0 10px;
+      font-size: 44px;
+      line-height:1.08;
+      letter-spacing:-.6px;
+      animation: fadeUp .85s ease .08s both;
+    }
+    .subtitle{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:16px;
+      max-width: 54ch;
+      animation: fadeUp .9s ease .14s both;
+    }
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      animation: fadeUp 1s ease .18s both;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:11px 14px;
+      border-radius: 12px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      transition:.2s ease;
+    }
+    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.08);}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 12px 26px rgba(79,124,255,.22);
+    }
 
-.brand{
-  font-weight:700;
-  letter-spacing:.4px;
-}
+    .mini{
+      display:grid;
+      gap:12px;
+      padding:16px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--stroke);
+      animation: fadeUp .95s ease .14s both;
+    }
+    .chipRow{display:flex; flex-wrap:wrap; gap:8px;}
+    .chip{
+      font-size:12px;
+      color: var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      transition:.2s ease;
+    }
+    .chip:hover{transform: translateY(-2px); color:var(--text);}
 
-/* HERO */
-.hero{
-  margin-top:50px;
-  display:grid;
-  grid-template-columns:1.3fr .7fr;
-  gap:30px;
-}
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr}
-}
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 6;
+      padding:18px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border:1px solid var(--stroke);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      transform: translateY(10px);
+      opacity:0;
+      transition: .6s ease;
+    }
+    .card.show{transform: translateY(0); opacity:1;}
+    .card h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .card p, .card li{color:var(--muted); font-size:14px; margin:0}
+    .card ul{margin:10px 0 0; padding-left:18px;}
+    .card.full{grid-column: span 12;}
+    @media (max-width: 860px){
+      .card{grid-column: span 12;}
+    }
 
-.card{
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:30px;
-  backdrop-filter:blur(14px);
-  box-shadow:0 30px 80px rgba(0,0,0,.35);
-  animation:fadeUp .9s ease forwards;
-}
+    .line{
+      height:1px; background: rgba(255,255,255,.08);
+      margin:10px 0 12px;
+    }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
+    footer{
+      margin-top:32px;
+      color: rgba(234,240,255,.55);
+      font-size:13px;
+      text-align:center;
+    }
 
-.tag{
-  display:inline-block;
-  padding:8px 14px;
-  border-radius:999px;
-  background:rgba(79,124,255,.15);
-  color:#cfe0ff;
-  font-size:13px;
-  margin-bottom:18px;
-}
+    /* link styling */
+    a.link{
+      color: var(--text);
+      text-decoration:none;
+    }
+    a.link:hover{
+      text-decoration: underline;
+    }
 
-h1{
-  font-size:46px;
-  margin:10px 0 12px;
-  letter-spacing:-.8px;
-}
+    @keyframes fadeUp{
+      from{opacity:0; transform: translateY(10px);}
+      to{opacity:1; transform: translateY(0);}
+    }
 
-.subtitle{
-  color:var(--muted);
-  max-width:55ch;
-  line-height:1.6;
-}
-
-/* INFO BOX */
-.info{
-  display:grid;
-  gap:14px;
-}
-.info div{
-  padding:14px 18px;
-  border-radius:14px;
-  background:rgba(255,255,255,.06);
-  border:1px solid var(--border);
-  font-size:14px;
-  color:var(--muted);
-}
-
-/* SECTION */
-section{
-  margin-top:70px;
-}
-section h2{
-  font-size:26px;
-  margin-bottom:24px;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  gap:20px;
-}
-.col-12{grid-column:span 12}
-.col-6{grid-column:span 6}
-@media(max-width:900px){
-  .col-6{grid-column:span 12}
-}
-
-.list li{
-  margin-bottom:10px;
-  color:var(--muted);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  margin-top:80px;
-  color:#8a90c7;
-  font-size:13px;
-}
-</style>
+    /* respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
+      html{scroll-behavior:auto}
+    }
+  </style>
 </head>
 
 <body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
 
-<div class="glow"></div>
-<div class="glow two"></div>
+  <div class="wrap">
 
-<div class="container">
+    <div class="nav">
+      <div class="brand"><span class="dot"></span> Ashraful</div>
+      <div>
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#work">Academic Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
 
-<nav>
-  <div class="brand">Ashraful Islam</div>
-  <div>
-    <a href="#about">About</a>
-    <a href="#thesis">Thesis</a>
-    <a href="#contact">Contact</a>
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div>
+          <div class="badge"><span></span> Research & Academic Portfolio</div>
+          <h1>Md. Ashraful Islam</h1>
+          <p class="subtitle">
+            Final Year Software Engineering Student • ML Enthusiast • Researcher <br/>
+            Daffodil International University
+          </p>
+
+          <div class="cta">
+            <a class="btn primary" href="#work">View Academic Work</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="mini">
+          <div style="font-weight:700; letter-spacing:.2px;">Core Stack</div>
+          <div class="chipRow">
+            <span class="chip">C</span>
+            <span class="chip">C++</span>
+            <span class="chip">Python</span>
+            <span class="chip">Machine Learning</span>
+            <span class="chip">DSA</span>
+            <span class="chip">GitHub</span>
+          </div>
+
+          <div class="line"></div>
+
+          <div style="display:grid; gap:8px;">
+            <div style="color:var(--muted); font-size:13px;">
+              Competitive Programming: Codeforces • CodeChef • LeetCode
+            </div>
+            <div style="color:var(--muted); font-size:13px;">
+              CodeChef Rating: <strong style="color:var(--text);">2★</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card full" id="about">
+        <h2>About</h2>
+        <p>
+          I am a final-year Software Engineering student with a strong interest in machine learning and
+          research-oriented software development. I focus on building clean fundamentals in programming,
+          data structures, and applied ML—especially in healthcare analytics.
+        </p>
+      </div>
+
+      <div class="card" id="focus">
+        <h2>Education</h2>
+        <p><strong>B.Sc. in Software Engineering</strong><br/>Daffodil International University (2022–2025, Ongoing)</p>
+        <div class="line"></div>
+        <p><strong>HSC (Science)</strong> – GPA 5.00<br/>Govt. Science College, Tejgaon, Dhaka</p>
+        <p style="margin-top:8px;"><strong>SSC (Science)</strong> – GPA 5.00<br/>Manikganj Govt. High School</p>
+      </div>
+
+      <div class="card">
+        <h2>Skills</h2>
+        <ul>
+          <li>Programming: C, C++, Python</li>
+          <li>Core CS: OOP, DSA</li>
+          <li>ML: Supervised learning basics, evaluation</li>
+          <li>Tools: Git & GitHub, MySQL</li>
+        </ul>
+      </div>
+
+      <div class="card full" id="work">
+        <h2>Academic Work</h2>
+        <p><strong>Undergraduate Thesis (Completed)</strong></p>
+        <p style="margin-top:6px;">
+          <em>
+            A Comparative Study of Machine Learning Models for Early Detection of Diabetes
+            using Symptom-Based Clinical Data
+          </em>
+        </p>
+        <div class="line"></div>
+        <p>
+          This study presents a comparative evaluation of multiple machine learning models for early diabetes detection
+          using symptom-based clinical datasets, focusing on data preprocessing, feature analysis, and performance comparison.
+        </p>
+      </div>
+
+      <div class="card" id="contact">
+        <h2>Contact</h2>
+        <p>Email: <strong>m.ashraful.islam007@gmail.com</strong></p>
+
+        <p style="margin-top:10px;">
+          GitHub:
+          <a class="link" href="https://github.com/AshrafRahul" target="_blank">github.com/AshrafRahul</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="#top" class="link">Back to top</a></li>
+          <li><a href="https://github.com/AshrafRahul" target="_blank" class="link">GitHub Profile</a></li>
+        </ul>
+        <p style="margin-top:10px; color:var(--muted); font-size:13px;">
+          (Phone number is intentionally not included for public portfolio safety.)
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Md. Ashraful Islam • Built with HTML/CSS • GitHub Pages
+    </footer>
+
   </div>
-</nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="card">
-    <span class="tag">Academic & Research Portfolio</span>
-    <h1>Md. Ashraful Islam</h1>
-    <p class="subtitle">
-      Final Year Software Engineering Student • Machine Learning Enthusiast • Researcher <br>
-      Daffodil International University
-    </p>
-  </div>
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-  <div class="card info">
-    <div>🎓 B.Sc. in Software Engineering (2022–2025)</div>
-    <div>🧠 Research Focus: ML in Healthcare</div>
-    <div>💻 Skills: C, C++, Python, Machine Learning</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-  <h2>About Me</h2>
-  <div class="card col-12">
-    I am a final-year Software Engineering student with a strong academic interest
-    in machine learning and healthcare analytics. My work emphasizes comparative
-    model evaluation, data-driven insights, and research-oriented problem solving.
-  </div>
-</section>
-
-<!-- THESIS -->
-<section id="thesis">
-  <h2>Undergraduate Thesis (Completed)</h2>
-  <div class="card col-12">
-    <strong>
-      A Comparative Study of Machine Learning Models for Early Detection of Diabetes
-      using Symptom-Based Clinical Data
-    </strong>
-    <p class="subtitle" style="margin-top:14px;">
-      This research presents a structured comparison of multiple machine learning
-      algorithms for early diabetes detection, focusing on data preprocessing,
-      feature analysis, and performance evaluation using clinical symptom-based data.
-    </p>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="card col-12">
-    📧 Email: <strong>m.ashraful.islam007@gmail.com</strong><br><br>
-    🔗 GitHub:
-    <a href="https://github.com/AshrafRahul" target="_blank" style="color:#cfe0ff">
-      github.com/AshrafRahul
-    </a>
-  </div>
-</section>
-
-<footer>
-  © <span id="year"></span> Md. Ashraful Islam
-</footer>
-
-</div>
-
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
+    // Smooth reveal on scroll (lightweight)
+    const cards = document.querySelectorAll(".card");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("show");
+      });
+    }, {threshold: 0.12});
+    cards.forEach(c=>io.observe(c));
+  </script>
 </body>
 </html>
